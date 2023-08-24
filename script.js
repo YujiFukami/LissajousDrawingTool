@@ -16,6 +16,20 @@ const outerColorInput = document.getElementById('outerColor');
 const lineColorInput = document.getElementById('lineColor');
 const lineWidthInput = document.getElementById('lineWidth');
 
+// 線のxy座標を計算する関数
+function calculateLissajousPoints(a, b) {
+    const points = [];
+    const avgValue = (a + b) / 2;
+    const stepSize = 0.01 / (avgValue / 10);
+
+    for (let t = 0; t < 2 * Math.PI; t += stepSize) {
+        const x = A * Math.sin(a * t) + offsetX;
+        const y = B * Math.sin(b * t) + offsetY;
+        points.push({ x, y });
+    }
+    return points;
+}
+
 function drawLissajousCurve(a, b) {
     // 現在のキャンバスの状態を保存
     ctx.save();        
@@ -36,14 +50,12 @@ function drawLissajousCurve(a, b) {
     ctx.strokeStyle = lineColor; // 線の色の更新
     ctx.lineWidth = lineWidth;   // 線の太さの更新
     
-    const avgValue = (a + b) / 2;
-    const stepSize = 0.01 / (avgValue / 10);
+    // 座標を計算
+    const points = calculateLissajousPoints(a, b);
 
     ctx.beginPath();
-    for (let t = 0; t < 2 * Math.PI; t += stepSize) {
-        const x = A * Math.sin(a * t) + offsetX;
-        const y = B * Math.sin(b * t) + offsetY;
-        ctx.lineTo(x, y);
+    for (const point of points) {
+        ctx.lineTo(point.x, point.y);
     }
     ctx.closePath();
     ctx.stroke();
@@ -62,6 +74,7 @@ function drawLissajousCurve(a, b) {
     // クリッピングをリセット
     ctx.restore();
 }
+
 
 function updateDownloadLink() {
     const downloadLink = document.getElementById('downloadLink');
