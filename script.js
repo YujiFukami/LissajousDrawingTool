@@ -1,0 +1,112 @@
+const canvas = document.getElementById('lissajousCanvas');
+canvas.width = canvas.offsetWidth;  // 実際の描画幅をCSSの幅に合わせる
+canvas.height = canvas.offsetHeight; // 実際の描画高さをCSSの高さに合わせる
+const ctx = canvas.getContext('2d');
+const aInput = document.getElementById('aValue');
+const bInput = document.getElementById('bValue');
+
+const A = canvas.width / 2 * 0.8;  // Adjusting amplitude based on the canvas size
+const B = canvas.height / 2 * 0.8;
+const offsetX = canvas.width / 2;
+const offsetY = canvas.height / 2;
+
+// ... 既存のJavaScript ...
+const innerColorInput = document.getElementById('innerColor');
+const outerColorInput = document.getElementById('outerColor');
+const lineColorInput = document.getElementById('lineColor');
+const lineWidthInput = document.getElementById('lineWidth');
+
+function drawLissajousCurve(a, b) {
+    // 現在のキャンバスの状態を保存
+    ctx.save();        
+
+    const innerColor = innerColorInput.value;
+    const outerColor = outerColorInput.value;
+    const lineColor = lineColorInput.value;
+    const lineWidth = parseFloat(lineWidthInput.value);
+
+    // グラデーションの作成
+    const gradient = ctx.createRadialGradient(offsetX, offsetY, 0, offsetX, offsetY, canvas.width / 2);
+    gradient.addColorStop(0, innerColor);
+    gradient.addColorStop(1, outerColor);
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height); // グラデーション背景の適用
+
+    ctx.strokeStyle = lineColor; // 線の色の更新
+    ctx.lineWidth = lineWidth;   // 線の太さの更新
+    
+    const avgValue = (a + b) / 2;
+    const stepSize = 0.01 / (avgValue / 10);
+
+    ctx.beginPath();
+    for (let t = 0; t < 2 * Math.PI; t += stepSize) {
+        const x = A * Math.sin(a * t) + offsetX;
+        const y = B * Math.sin(b * t) + offsetY;
+        ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+
+    // クリッピング領域を設定
+    ctx.clip();
+
+    // 線の色で塗りつぶし
+    ctx.fillStyle = lineColor;
+
+    const fillOption = document.querySelector('input[name="fillOption"]:checked').value;
+    if (fillOption === 'fill') {
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // クリッピングをリセット
+    ctx.restore();
+}
+
+function updateDownloadLink() {
+    const downloadLink = document.getElementById('downloadLink');
+    const dataURL = canvas.toDataURL('image/jpeg');
+    downloadLink.href = dataURL;
+    downloadLink.download = "lissajous.jpg";  // ファイルの拡張子を .png から .jpg に変更
+}
+
+function updateAndDraw() {
+    const a = parseFloat(aInput.value);
+    const b = parseFloat(bInput.value);
+    drawLissajousCurve(a, b);
+    updateDownloadLink();  // この行を追加
+
+}
+
+// 初期描画
+updateAndDraw();
+
+let bValue = 1;
+const bMax = 100;
+const animationDelay = 100; // 0.5秒
+
+function startAnimation() {
+    // 初期値の設定
+    bValue = 1;
+
+    // アニメーションの実行
+    function step() {
+        if (bValue <= bMax) {
+            bInput.value = bValue;
+            aInput.value = bValue - 1; // aの値をb-1に設定
+
+            updateAndDraw();
+
+            bValue+=2;
+            setTimeout(step, animationDelay); // 次のステップをスケジュール
+        }
+    }
+
+    step(); // 最初のステップを実行
+}
+
+function updateValueDisplay(elementId, value) {
+    document.getElementById(elementId + "Display").innerText = value;
+}
+
+document.getElementById('startAnimation').addEventListener('click', startAnimation);

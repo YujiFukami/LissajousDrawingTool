@@ -1,0 +1,105 @@
+/* PCなどの横長のデバイス用：縦基準のスタイル */
+#lissajousCanvas {
+    width: 80vh;
+    height: 80vh;
+    border: 2px solid #000;
+}
+input[type="range"], .control-group input[type="color"], .control-group input[type="number"] {
+    width: 20vh;
+    height: 4vh;
+    font-size: 4vh;
+}
+label, #startAnimation, .control-group3 #downloadLink {
+    font-size: 4vh;
+}
+
+.control-group2 span {
+    font-size: 4vh;
+}
+
+.control-group2 label {
+    font-size: 4vh; /* ここで「なし」、「あり」の文字サイズを指定 */
+}
+.control-group2 input[type="radio"] {
+    width: 2vh; /* ラジオボタンのサイズを指定 */
+    height: 2vh;
+}
+/* 縦長のデバイスの場合 */
+@media (max-aspect-ratio: 1/1) {
+    #lissajousCanvas {
+        width: 80vw;
+        height: 80vw; /* こちらを追加して正方形にします */
+    }
+    input[type="range"], .control-group input[type="color"], .control-group input[type="number"]  {
+        width: 80vw;
+        height: 4vw;
+        font-size: 4vw;
+    }
+    label, #startAnimation, .control-group3 #downloadLink {
+        font-size: 4vw;
+    }
+
+    .control-group2 span {
+        font-size: 4vw;
+    }
+
+    .control-group2 label {
+        font-size: 4vw; /* 縦長デバイス時の「なし」、「あり」の文字サイズ */
+    }
+    .control-group2 input[type="radio"] {
+        width: 2vw; /* ラジオボタンのサイズを縦長デバイスに合わせて調整 */
+        height: 2vw;
+    }
+
+}
+
+/* ラジオボタンに関するスタイル */
+.control-group2 input[type="radio"] {
+    padding: 0; /* 余白をリセット */
+    margin-right: 0.5rem; /* ラベルとの間に少し余白を追加 */
+    opacity: 1; /* もし不透明度が設定されていた場合はリセット */
+}
+
+/* ラジオボタンのラベルに関するスタイル */
+.control-group2 label {
+    font-size: 4vh;
+    margin-right: 1rem; /* 各オプション間に余白を追加 */
+}
+
+.center-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* viewportの高さの100% */
+}
+
+.control-group, .control-group2, .control-group3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* 項目の間隔を設定 */
+}
+
+#startAnimation{
+    font-size: 4vh;
+}
+
+.control-group3 #downloadLink {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+}
+
+.control-group3 #downloadLink:hover {
+    background-color: #45a049;
+}
