@@ -76,37 +76,37 @@ function drawLissajousCurve(a, b) {
 }
 
 
+// function updateDownloadLink() {
+//     const downloadLink = document.getElementById('downloadLink');
+//     const dataURL = canvas.toDataURL('image/jpeg');
+//     downloadLink.href = dataURL;
+//     downloadLink.download = "lissajous.jpg";  // ファイルの拡張子を .png から .jpg に変更
+// }
+
 function updateDownloadLink() {
     const downloadLink = document.getElementById('downloadLink');
-    const dataURL = canvas.toDataURL('image/jpeg');
+
+    // オフスクリーンキャンバスを作成
+    let offscreenCanvas = document.createElement("canvas");
+    offscreenCanvas.width = 4000;  // このサイズを適切な値に変更してください
+    offscreenCanvas.height = 4000;
+    let offscreenCtx = offscreenCanvas.getContext("2d");
+
+    // 現在のcanvasの内容をオフスクリーンcanvasに拡大描画
+    offscreenCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, offscreenCanvas.width, offscreenCanvas.height);
+
+    // オフスクリーンcanvasの内容をJPEG形式で取得
+    const dataURL = offscreenCanvas.toDataURL('image/jpeg');
     downloadLink.href = dataURL;
-    downloadLink.download = "lissajous.jpg";  // ファイルの拡張子を .png から .jpg に変更
+    downloadLink.download = "lissajous.jpg";
 }
 
+document.getElementById('downloadLink').addEventListener('click', updateDownloadLink); // ダウンロードリンクのクリック時に高解像度画像生成処理を実行する
+
 function updateAndDraw() {
-
-    // //https://developer.mozilla.org/ja/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
-
-    // // Get the DPR and size of the canvas
-    // const dpr = window.devicePixelRatio * 2;
-    // const rect = canvas.getBoundingClientRect();
-
-    // // Set the "actual" size of the canvas
-    // canvas.width = rect.width * dpr;
-    // canvas.height = rect.height * dpr;
-
-    // // Scale the context to ensure correct drawing operations
-    // ctx.scale(dpr, dpr);
-
-    // // Set the "drawn" size of the canvas
-    // canvas.style.width = rect.width + 'px';
-    // canvas.style.height = rect.height + 'px';
-    
     const a = parseFloat(aInput.value);
     const b = parseFloat(bInput.value);
     drawLissajousCurve(a, b);
-    updateDownloadLink();  // この行を追加
-
 }
 
 // 初期描画
