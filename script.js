@@ -5,18 +5,17 @@ const ctx = canvas.getContext('2d');
 const aInput = document.getElementById('aValue');
 const bInput = document.getElementById('bValue');
 
-const A = canvas.width / 2 * 0.8;  // Adjusting amplitude based on the canvas size
-const B = canvas.height / 2 * 0.8;
-const offsetX = canvas.width / 2;
-const offsetY = canvas.height / 2;
-
-// ... 既存のJavaScript ...
 const innerColorInput = document.getElementById('innerColor');
 const outerColorInput = document.getElementById('outerColor');
 const lineColorInput = document.getElementById('lineColor');
 const lineWidthInput = document.getElementById('lineWidth');
 
 // 線のxy座標を計算する関数
+const A = canvas.width / 2 * 0.8;  // Adjusting amplitude based on the canvas size
+const B = canvas.height / 2 * 0.8;
+const offsetX = canvas.width / 2;
+const offsetY = canvas.height / 2;
+
 function calculateLissajousPoints(a, b) {
     const points = [];
     const avgValue = (a + b) / 2;
