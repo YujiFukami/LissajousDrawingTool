@@ -169,3 +169,10 @@ function generateRandomColor() {
     return color;
 }
 
+// ツイート機能
+document.getElementById('tweetButton').addEventListener('click', function() {
+    const text = encodeURIComponent("リサージュ曲線が簡単に描けます！！");
+    const url = encodeURIComponent("https://lissajousdrawingtool.onrender.com/stringart");
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+});
+

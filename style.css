@@ -112,3 +112,23 @@ input[type="radio"] {
 .control-group4 #downloadLink:hover {
     background-color: #45a049;
 }
+
+/* ツイートボタン */
+.twitter-button {
+    background-color: #1DA1F2; /* Twitterの青色 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.twitter-button:hover {
+    background-color: #0c85d0; /* クリック時の色 */
+}
+
+.twitter-button i {
+    margin-right: 5px;
+}
