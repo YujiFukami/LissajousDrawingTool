@@ -10,27 +10,32 @@
 
     <div class="center-wrapper"> <!-- 追加するラッパー -->
         <canvas id="lissajousCanvas"></canvas>
-        <div class="control-group">
-            <label for="aValue">a: <span id="aValueDisplay">3</span></label>
-            <input type="range" id="aValue" value="3" min="1" max="100" step="1" oninput="updateValueDisplay('aValue', this.value); updateAndDraw();">
+        <div class="control-group control-group1">
+            <div class = "range-control">
+                <label for="aValue">a: <span id="aValueDisplay">3</span></label>
+                <input type="range" id="aValue" value="3" min="1" max="100" step="1" oninput="updateValueDisplay('aValue', this.value); updateAndDraw();">
+            </div>
             
-            <label for="bValue">b: <span id="bValueDisplay">2</span></label>
-            <input type="range" id="bValue" value="2" min="1" max="100" step="1" oninput="updateValueDisplay('bValue', this.value); updateAndDraw();">
+            <div class = "range-control">
+                <label for="bValue">b: <span id="bValueDisplay">2</span></label>
+                <input type="range" id="bValue" value="2" min="1" max="100" step="1" oninput="updateValueDisplay('bValue', this.value); updateAndDraw();">
+            </div>
         </div>
     
-        <div class="control-group"> <!-- 色の制御を囲む -->
-            <label for="innerColor">内側の色:</label>
+        <div class="control-group control-group2"> <!-- 色の制御を囲む -->
+            <label for="innerColor">内側色:</label>
             <input type="color" id="innerColor" value="#FFFFFF" oninput="updateAndDraw()" >
-            <label for="outerColor">外側の色:</label>
+            <label for="outerColor">外側色:</label>
             <input type="color" id="outerColor" value="#FFFFFF" oninput="updateAndDraw()" >
-            <label for="lineColor">線の色:</label>
+            <label for="lineColor">線色:</label>
             <input type="color" id="lineColor" value="#000000" oninput="updateAndDraw()" >
-            <label for="lineWidth">線の太さ:</label>
+            <button class="common-button" id="randomizeColors">色おまかせ</button>
+            <label for="lineWidth">線太さ:</label>
             <input type="number" id="lineWidth" value="2" min="1" max="10" step="1" oninput="updateAndDraw()" >
         </div>
 
         <!-- この部分は「色の制御を囲む」divの直後に追加します。 -->
-        <div class="control-group2">
+        <div class="control-group control-group3">
             <span>線の塗潰し:</span>
             <label>
                 <input type="radio" name="fillOption" value="nofill" checked oninput="updateAndDraw()">なし
@@ -40,8 +45,9 @@
             </label>
         </div>
 
-        <div class="control-group3">
-            <button id="startAnimation">START</button>
+        <div class="control-group control-group4">
+            <button class="common-button" id="startAnimation">START</button>
+            <button class="common-button" id="stopAnimation">STOP</button>
             <!-- 画像として保存するためのダウンロードリンク -->
             <a id="downloadLink" download="lissajous.png">画像としてダウンロード</a>
         </div>

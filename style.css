@@ -1,83 +1,89 @@
 /* PCなどの横長のデバイス用：縦基準のスタイル */
 #lissajousCanvas {
+    margin-top: 20px;
     width: 80vh;
     height: 80vh;
     border: 2px solid #000;
 }
 
-input[type="range"]{
+.control-group{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem; /* 項目の間隔を設定 */
+    font-size: 3vh;
+}
+
+.range-control{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="range"]{/*スライダー*/
     width: 40vh;
-    height: 8vh;
-    font-size: 4vh;
+    height: 5vh;
 }
 
-.control-group input[type="color"], .control-group input[type="number"] {
-    width: 20vh;
-    height: 8vh;
-    font-size: 4vh;
+input[type="color"]{
+    width: 10vh;
+    height: 5vh;
+    /* font-size: 4vh; */
 }
 
-label, #startAnimation, .control-group3 #downloadLink {
-    font-size: 4vh;
+/* .control-groupでは設定できないフォントサイズ */
+input[type="number"],.common-button{
+    font-size: 3vh;
 }
 
-.control-group2 span {
-    font-size: 4vh;
+input[type="radio"] {
+    width: 3vh; /* ラジオボタンのサイズを指定 */
+    height: 3vh;
 }
 
-.control-group2 label {
-    font-size: 4vh; /* ここで「なし」、「あり」の文字サイズを指定 */
-}
-.control-group2 input[type="radio"] {
-    width: 2vh; /* ラジオボタンのサイズを指定 */
-    height: 2vh;
-}
 /* 縦長のデバイスの場合 */
 @media (max-aspect-ratio: 1/1) {
+    /* PCなどの横長のデバイス用：縦基準のスタイル */
     #lissajousCanvas {
         width: 80vw;
-        height: 80vw; /* こちらを追加して正方形にします */
+        height: 80vw;
     }
 
-    input[type="range"] {
-        width: 80vw;
-        height: 8vw;
-        font-size: 4vw;
+    .control-group{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem; /* 項目の間隔を設定 */
+        font-size: 2vw;
     }
 
-    .control-group input[type="color"], .control-group input[type="number"]  {
-        width: 20vw;
-        height: 8vw;
-        font-size: 4vw;
-    }
-    label, #startAnimation, .control-group3 #downloadLink {
-        font-size: 4vw;
+    .control-group1{
+        display: flex;
+        flex-direction: column;
     }
 
-    .control-group2 span {
-        font-size: 4vw;
-    }
-
-    .control-group2 label {
-        font-size: 4vw; /* 縦長デバイス時の「なし」、「あり」の文字サイズ */
-    }
-    .control-group2 input[type="radio"] {
-        width: 2vw; /* ラジオボタンのサイズを縦長デバイスに合わせて調整 */
+    input[type="range"]{/*スライダー*/
+        width: 40vw;
         height: 2vw;
     }
 
-}
+    input[type="color"]{
+        width: 6vw;
+        height: 4vw;
+        /* font-size: 4vw; */
+    }
 
-/* ラジオボタンに関するスタイル */
-.control-group2 input[type="radio"] {
-    padding: 0; /* 余白をリセット */
-    margin-right: 0.5rem; /* ラベルとの間に少し余白を追加 */
-    opacity: 1; /* もし不透明度が設定されていた場合はリセット */
-}
+    /* .control-groupでは設定できないフォントサイズ */
+    input[type="number"],.common-button{
+        font-size: 3vw;
+    }
 
-/* ラジオボタンのラベルに関するスタイル */
-.control-group2 label {
-    margin-right: 1rem; /* 各オプション間に余白を追加 */
+    input[type="radio"] {
+        width: 3vw; /* ラジオボタンのサイズを指定 */
+        height: 3vw;
+    }
+
 }
 
 .center-wrapper {
@@ -86,21 +92,14 @@ label, #startAnimation, .control-group3 #downloadLink {
     align-items: center;
     justify-content: center;
     height: 100vh; /* viewportの高さの100% */
+    gap:5px;
 }
 
-.control-group, .control-group2, .control-group3 {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem; /* 項目の間隔を設定 */
-}
-
-.control-group3 #downloadLink {
+.control-group4 #downloadLink {
     display: inline-block;
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     border: none;
@@ -110,6 +109,6 @@ label, #startAnimation, .control-group3 #downloadLink {
     border-radius: 5px;
 }
 
-.control-group3 #downloadLink:hover {
+.control-group4 #downloadLink:hover {
     background-color: #45a049;
 }

@@ -112,6 +112,9 @@ function updateAndDraw() {
 // 初期描画
 updateAndDraw();
 
+// アニメーション関連
+let animationTimerId = null; // setTimeoutのIDを保持する変数
+
 let bValue = 1;
 const bMax = 100;
 const animationDelay = 100; // 0.5秒
@@ -128,8 +131,8 @@ function startAnimation() {
 
             updateAndDraw();
 
-            bValue+=2;
-            setTimeout(step, animationDelay); // 次のステップをスケジュール
+            bValue += 2;
+            animationTimerId = setTimeout(step, animationDelay); // 次のステップをスケジュール
         }
     }
 
@@ -141,3 +144,29 @@ function updateValueDisplay(elementId, value) {
 }
 
 document.getElementById('startAnimation').addEventListener('click', startAnimation);
+
+document.getElementById('stopAnimation').addEventListener('click', function() {
+    if (animationTimerId !== null) {
+        clearTimeout(animationTimerId);  // setTimeoutのキャンセル
+        animationTimerId = null;
+    }
+});
+
+// 「おまかせ」ボタンのクリックイベントに結び付ける
+document.getElementById('randomizeColors').addEventListener('click', function() {
+    innerColorInput.value = generateRandomColor();
+    outerColorInput.value = generateRandomColor();
+    lineColorInput.value = generateRandomColor();
+    updateAndDraw(); // 描画を更新
+});
+
+// ランダムな色を返す
+function generateRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
