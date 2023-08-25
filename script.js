@@ -84,6 +84,24 @@ function updateDownloadLink() {
 }
 
 function updateAndDraw() {
+
+    // //https://developer.mozilla.org/ja/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
+
+    // // Get the DPR and size of the canvas
+    // const dpr = window.devicePixelRatio * 2;
+    // const rect = canvas.getBoundingClientRect();
+
+    // // Set the "actual" size of the canvas
+    // canvas.width = rect.width * dpr;
+    // canvas.height = rect.height * dpr;
+
+    // // Scale the context to ensure correct drawing operations
+    // ctx.scale(dpr, dpr);
+
+    // // Set the "drawn" size of the canvas
+    // canvas.style.width = rect.width + 'px';
+    // canvas.style.height = rect.height + 'px';
+    
     const a = parseFloat(aInput.value);
     const b = parseFloat(bInput.value);
     drawLissajousCurve(a, b);
